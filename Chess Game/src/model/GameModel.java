@@ -51,16 +51,16 @@ public class GameModel {
     /**
      * It takes in the coordinates
      * and makes the move happen in the model
-     * @param startRow
+     * @param startRank
      * @param startCol
-     * @param endRow
+     * @param endRank
      * @param endCol
      * @return
      */
-    public boolean makeMove(int startRow, int startCol, int endRow, int endCol)
+    public boolean makeMove(int startRank, int startCol, int endRank, int endCol)
     {
-        ChessBox source = chessBoard.getBoxes()[startRow][startCol];
-        ChessBox destination = chessBoard.getBoxes()[endRow][endCol];
+        ChessBox source = chessBoard.getBoxes()[startRank][startCol];
+        ChessBox destination = chessBoard.getBoxes()[endRank][endCol];
         boolean successful =  move.makeMove(source, destination);
         return successful;
     }
@@ -76,13 +76,13 @@ public class GameModel {
     /**
      * returns an array of size-two arrays
      * list of possible moves
-     * @param row
+     * @param rank
      * @param col
      * @return
      */
-    public ArrayList<int[]> getPossibleMoves(int row, int col)
+    public ArrayList<int[]> getPossibleMoves(int rank, int col)
     {
-        ChessBox chessBox = chessBoard.getBoxes()[row][col];
+        ChessBox chessBox = chessBoard.getBoxes()[rank][col];
         ArrayList<int[]> listOfPossibleMoves= new ArrayList<int[]>();
         for(ChessBox possibleBox: chessBox.getOccupyingPiece().getPossibleMoves(chessBoard))
         {
@@ -96,13 +96,13 @@ public class GameModel {
 
     /**
      * Returns occupied status of the box
-     * @param row
+     * @param rank
      * @param col
      * @return
      */
-    public boolean isOccupied(int row, int col)
+    public boolean isOccupied(int rank, int col)
     {
-        return chessBoard.getBoxes()[row][col].isOccupied();
+        return chessBoard.getBoxes()[rank][col].isOccupied();
     }
 
     /**
@@ -158,13 +158,13 @@ public class GameModel {
     /**
      * Checks if the box chosen is of the player in turn
      * returns TRUE if it ISN'T
-     * @param row
+     * @param rank
      * @param col
      * @return
      */
-    public boolean notInTurnBox(int row, int col) {
+    public boolean notInTurnBox(int rank, int col) {
 
-        ChessBox boxInQuestion = chessBoard.getBoxes()[row][col];
+        ChessBox boxInQuestion = chessBoard.getBoxes()[rank][col];
         String pieceColor = boxInQuestion.getOccupyingPiece().getColor();
         String playerColor = gameState.getPlayerInTurn().getColor();
         if(pieceColor.equalsIgnoreCase(playerColor))

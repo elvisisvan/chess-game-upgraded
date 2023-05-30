@@ -22,8 +22,8 @@ public class SetBoard {
 
     public void setBoxes()
     {
-        for(int i = 0; i<chessBoard.getNumberOfRows();i++)
-            for(int j = 0; j<chessBoard.getNumberOfColumns();j++)
+        for(int i = 0; i<chessBoard.getNumberOfRanks();i++)
+            for(int j = 0; j<chessBoard.getNumberOfFiles();j++)
             {   String color;
                 if(i%2==0) {
                     if (j % 2 == 0)
@@ -52,7 +52,7 @@ public class SetBoard {
         ChessBox boxToPutIn;
 
         //Setting black pawns
-        for(int i = 6,j=0; j<chessBoard.getNumberOfRows();j++)
+        for(int i = 6,j=0; j<chessBoard.getNumberOfRanks();j++)
         {
             boxToPutIn = chessBoard.boxes[i][j];
             pieceToPut = new Pawn("black", chessBoard.boxes[i][j]);
@@ -62,7 +62,7 @@ public class SetBoard {
         }
 
         //Setting white pawns
-        for(int i = 1,j=0; j<chessBoard.getNumberOfRows();j++)
+        for(int i = 1,j=0; j<chessBoard.getNumberOfRanks();j++)
         {
             boxToPutIn = chessBoard.boxes[i][j];
             pieceToPut = new Pawn("white", boxToPutIn);

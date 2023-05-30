@@ -83,23 +83,23 @@ public class GameController {
         public void actionPerformed(ActionEvent e)
         {
             //System.out.println(e.getActionCommand());
-            int row = e.getActionCommand().charAt(0) - '0';
+            int rank = e.getActionCommand().charAt(0) - '0';
             int col = e.getActionCommand().charAt(2)- '0';
             switch(rotation)
             {
-                case 0: if(!theModel.isOccupied(row,col))
+                case 0: if(!theModel.isOccupied(rank,col))
                             break;
-                        if(theModel.notInTurnBox(row,col))
+                        if(theModel.notInTurnBox(rank,col))
                             break;
-                        selectBox(row,col);
+                        selectBox(rank,col);
                         rotation=1;
                         break;
-                case 1: boolean success = moveBoxPiece(row,col);
+                case 1: boolean success = moveBoxPiece(rank,col);
                         if(success)
                         {
                             theModel.toggleTurn();
                             theView.changePlayerPaneColor(theModel.getPlayerInTurnColor());
-                            theView.moveBox(selectedBox[0],selectedBox[1],row,col);
+                            theView.moveBox(selectedBox[0],selectedBox[1],rank,col);
 
 //                            System.out.println(theModel.getPlayerInTurnColor() + "s Turn!");
                         }
@@ -119,12 +119,12 @@ public class GameController {
     /**
      * function to try moving a piece
      * Uses the selectedBox to find the coordinates
-     * @param row
+     * @param rank
      * @param col
      * @return
      */
-    private boolean moveBoxPiece(int row, int col) {
-        boolean success = theModel.makeMove(selectedBox[0],selectedBox[1],row,col);
+    private boolean moveBoxPiece(int rank, int col) {
+        boolean success = theModel.makeMove(selectedBox[0],selectedBox[1],rank,col);
         return success;
     }
 
@@ -132,14 +132,14 @@ public class GameController {
     /**
      * Selects a box both in View and Model
      * also highlights all the possible boxes
-     * @param row
+     * @param rank
      * @param col
      */
-    public void selectBox(int row, int col) {
-        selectedBox[0] = row;
+    public void selectBox(int rank, int col) {
+        selectedBox[0] = rank;
         selectedBox[1] = col;
-        theView.setBoxAsSelected(row, col);
-        ArrayList<int[]> possibleMoves = theModel.getPossibleMoves(row, col);
+        theView.setBoxAsSelected(rank, col);
+        ArrayList<int[]> possibleMoves = theModel.getPossibleMoves(rank, col);
         for(int[] box: possibleMoves)
         {
             if(theModel.isOccupied(box[0],box[1]))

@@ -213,15 +213,15 @@ public class ChessGUI{
 
         chessBoxes = new JButton[8][8];
 
-        for(int row = 7; row >= 0; row--){
+        for(int rank = 7; rank >= 0; rank--){
             for(int col = 0; col < 8; col++){
 
-                chessBoxes[row][col] = new JButton();
-                chessBoxes[row][col].setOpaque(true);
-                chessBoxes[row][col].setBackground(getBoxColor(row, col));
-                chessBoxes[row][col].setForeground(getBoxColor(row, col));
-                chessBoard.add(chessBoxes[row][col]);
-                chessBoxes[row][col].setActionCommand(row + " " + col);
+                chessBoxes[rank][col] = new JButton();
+                chessBoxes[rank][col].setOpaque(true);
+                chessBoxes[rank][col].setBackground(getBoxColor(rank, col));
+                chessBoxes[rank][col].setForeground(getBoxColor(rank, col));
+                chessBoard.add(chessBoxes[rank][col]);
+                chessBoxes[rank][col].setActionCommand(rank + " " + col);
             }
         }
     }
@@ -249,10 +249,10 @@ public class ChessGUI{
             //Online source for the Chess Piece Images
             URL url = new URL("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Chess_Pieces_Sprite.svg/800px-Chess_Pieces_Sprite.svg.png");
             BufferedImage bi = ImageIO.read(url);
-            for (int imageRow = 0; imageRow < 2; imageRow++) {
+            for (int imageRank = 0; imageRank < 2; imageRank++) {
                 for (int imageCol = 0; imageCol < 6; imageCol++) {
-                    chessPieceImages[imageRow][imageCol] = bi.getSubimage(
-                            imageCol * 133, imageRow * 133, 133, 133);
+                    chessPieceImages[imageRank][imageCol] = bi.getSubimage(
+                            imageCol * 133, imageRank * 133, 133, 133);
                 }
             }
         } catch (Exception e) {
@@ -267,14 +267,14 @@ public class ChessGUI{
     /**
      * This function returns the appropriate chessBoxes color
      *
-     * @param row
+     * @param rank
      * @param col
      * @return Color of the Box
      */
-    public Color getBoxColor(int row, int col){
+    public Color getBoxColor(int rank, int col){
 
         //Calculation for spot color
-        if((row + col) % 2 == 0)
+        if((rank + col) % 2 == 0)
             return new Color(102, 102, 102); //BLACK RGB
         else
             return new Color(255, 255, 255); //WHITE RGB
@@ -284,58 +284,58 @@ public class ChessGUI{
      */
     public void drawPiecesForNewGame(){
 
-        for(int row = 7; row>= 0; row--){
+        for(int rank = 7; rank>= 0; rank--){
             for(int col = 0; col < 8; col++){
 
                 //WHITE PAWNS
-                if(row == 6){
-                    chessBoxes[row][col].setIcon(new ImageIcon(chessPieceImages[WHITE][PAWN]));
+                if(rank == 6){
+                    chessBoxes[rank][col].setIcon(new ImageIcon(chessPieceImages[WHITE][PAWN]));
                 }
                 //BLACK PAWNS
-                else if(row == 1){
-                    chessBoxes[row][col].setIcon(new ImageIcon(chessPieceImages[BLACK][PAWN]));
+                else if(rank == 1){
+                    chessBoxes[rank][col].setIcon(new ImageIcon(chessPieceImages[BLACK][PAWN]));
                 }
                 //WHITE FACE PIECES
-                else if(row == 7){
+                else if(rank == 7){
                     if(col == 0 || col == 7)
-                        chessBoxes[row][col].setIcon(new ImageIcon(chessPieceImages[WHITE][ROOK]));
+                        chessBoxes[rank][col].setIcon(new ImageIcon(chessPieceImages[WHITE][ROOK]));
                     else if(col == 1 || col == 6)
-                        chessBoxes[row][col].setIcon(new ImageIcon(chessPieceImages[WHITE][KNIGHT]));
+                        chessBoxes[rank][col].setIcon(new ImageIcon(chessPieceImages[WHITE][KNIGHT]));
                     else if(col == 2 || col == 5)
-                        chessBoxes[row][col].setIcon(new ImageIcon(chessPieceImages[WHITE][BISHOP]));
+                        chessBoxes[rank][col].setIcon(new ImageIcon(chessPieceImages[WHITE][BISHOP]));
                     else if(col == 4)
-                        chessBoxes[row][col].setIcon(new ImageIcon(chessPieceImages[WHITE][QUEEN]));
+                        chessBoxes[rank][col].setIcon(new ImageIcon(chessPieceImages[WHITE][QUEEN]));
                     else if(col == 3)
-                        chessBoxes[row][col].setIcon(new ImageIcon(chessPieceImages[WHITE][KING]));
+                        chessBoxes[rank][col].setIcon(new ImageIcon(chessPieceImages[WHITE][KING]));
                 }
                 //BLACK FACE PIECES
-                else if(row == 0){
+                else if(rank == 0){
                     if(col == 0 || col == 7)
-                        chessBoxes[row][col].setIcon(new ImageIcon(chessPieceImages[BLACK][ROOK]));
+                        chessBoxes[rank][col].setIcon(new ImageIcon(chessPieceImages[BLACK][ROOK]));
                     else if(col == 1 || col == 6)
-                        chessBoxes[row][col].setIcon(new ImageIcon(chessPieceImages[BLACK][KNIGHT]));
+                        chessBoxes[rank][col].setIcon(new ImageIcon(chessPieceImages[BLACK][KNIGHT]));
                     else if(col == 2 || col == 5)
-                        chessBoxes[row][col].setIcon(new ImageIcon(chessPieceImages[BLACK][BISHOP]));
+                        chessBoxes[rank][col].setIcon(new ImageIcon(chessPieceImages[BLACK][BISHOP]));
                     else if(col == 4)
-                        chessBoxes[row][col].setIcon(new ImageIcon(chessPieceImages[BLACK][QUEEN]));
+                        chessBoxes[rank][col].setIcon(new ImageIcon(chessPieceImages[BLACK][QUEEN]));
                     else if(col == 3)
-                        chessBoxes[row][col].setIcon(new ImageIcon(chessPieceImages[BLACK][KING]));
+                        chessBoxes[rank][col].setIcon(new ImageIcon(chessPieceImages[BLACK][KING]));
                 }
             }
         }
     }
 
-    public void setBoxAsSelected(int row, int col) {
-        chessBoxes[row][col].setBackground(Color.CYAN);
+    public void setBoxAsSelected(int rank, int col) {
+        chessBoxes[rank][col].setBackground(Color.CYAN);
     }
 
-    public void setBoxAsPossible(int row, int col) {
-        chessBoxes[row][col].setBackground(Color.GREEN);
+    public void setBoxAsPossible(int rank, int col) {
+        chessBoxes[rank][col].setBackground(Color.GREEN);
     }
 
-    public void moveBox(int sourceRow, int sourceCol, int destRow, int destCol) {
-        JButton source = chessBoxes[sourceRow][sourceCol];
-        JButton destination = chessBoxes[destRow][destCol];
+    public void moveBox(int sourcerank, int sourceCol, int destrank, int destCol) {
+        JButton source = chessBoxes[sourcerank][sourceCol];
+        JButton destination = chessBoxes[destrank][destCol];
         Icon sourceIcon = source.getIcon();
         destination.setIcon(sourceIcon);
         source.setIcon(null);
@@ -352,8 +352,8 @@ public class ChessGUI{
         }
     }
 
-    public void setBoxAsInDanger(int row, int col) {
-        chessBoxes[row][col].setBackground(Color.RED);
+    public void setBoxAsInDanger(int rank, int col) {
+        chessBoxes[rank][col].setBackground(Color.RED);
     }
 
     public void changePlayerPaneColor(String playerColor)

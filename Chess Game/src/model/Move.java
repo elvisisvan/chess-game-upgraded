@@ -22,14 +22,14 @@ public class Move {
     {
 
         int toReturn[] = new int[4];
-        int startColumn = ChessBox.convertColumnCharacter(move.charAt(0));
-        int startRow = ChessBox.convertRowCharacter(move.charAt(1));
-        int endColumn = ChessBox.convertColumnCharacter(move.charAt(3));
-        int endRow = ChessBox.convertRowCharacter(move.charAt(4));
-        toReturn[0]=startColumn;
-        toReturn[1] = startRow;
-        toReturn[2] = endColumn;
-        toReturn[3] = endRow;
+        int startFile = ChessBox.convertFileCharacter(move.charAt(0));
+        int startRank = ChessBox.convertRankCharacter(move.charAt(1));
+        int endFile = ChessBox.convertFileCharacter(move.charAt(3));
+        int endRank = ChessBox.convertRankCharacter(move.charAt(4));
+        toReturn[0]=startFile;
+        toReturn[1] = startRank;
+        toReturn[2] = endFile;
+        toReturn[3] = endRank;
         return toReturn;
     }
 
